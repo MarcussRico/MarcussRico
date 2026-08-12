@@ -1,46 +1,52 @@
 <div align="center">
 
-<img src="https://capsule-render.vercel.app/api?type=waving&color=0:0f0c29,35:302b63,70:24243e,100:1a1a2e&height=260&section=header&text=Sai&fontSize=90&fontColor=ffffff&animation=twinkling&fontAlignY=32&desc=Agentic%20AI%20%E2%80%A2%20RAG%20%E2%80%A2%20LLMs%20%E2%80%A2%20Computer%20Vision&descAlignY=52&descSize=20&descColor=A970FF" width="100%" />
+<img src="https://capsule-render.vercel.app/api?type=waving&color=0:000000,35:1a1a1a,70:0d0d0d,100:000000&height=260&section=header&text=Sai&fontSize=90&fontColor=ffffff&animation=twinkling&fontAlignY=32&desc=Agentic%20AI%20%E2%80%A2%20GenAI%20%E2%80%A2%20RAG%20%E2%80%A2%20LLMs%20%E2%80%A2%20PyTorch%20%E2%80%A2%20Computer%20Vision&descAlignY=52&descSize=16&descColor=FFB000" width="100%" />
 
-<img src="https://readme-typing-svg.demolab.com?font=Fira+Code&weight=700&size=26&duration=2600&pause=700&color=A970FF&center=true&vCenter=true&width=800&height=90&lines=building+agents+that+actually+use+their+tools;RAG+pipelines+that+retrieve+the+right+thing;CSE+undergrad+%40+Chennai+Institute+of+Technology;honest+baselines+%3E+suspicious+accuracy+numbers" alt="Typing SVG" />
-
-<br/>
-
-<a href="mailto:saianandro@gmail.com"><img src="https://img.shields.io/badge/Email-D14836?style=for-the-badge&logo=gmail&logoColor=white" /></a>
-<a href="https://github.com/MarcussRico"><img src="https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=github&logoColor=white" /></a>
-<img src="https://komarev.com/ghpvc/?username=MarcussRico&style=for-the-badge&color=A970FF&label=PROFILE+VIEWS" />
+<img src="https://raw.githubusercontent.com/MarcussRico/MarcussRico/main/ticker.svg" alt="scrolling ticker" width="900" />
 
 <br/><br/>
 
-<img src="https://img.shields.io/badge/Agentic%20AI-8A2BE2?style=for-the-badge&logo=robotframework&logoColor=white" />
-<img src="https://img.shields.io/badge/RAG-6C3EF4?style=for-the-badge&logo=databricks&logoColor=white" />
-<img src="https://img.shields.io/badge/LLMs-5865F2?style=for-the-badge&logo=openai&logoColor=white" />
-<img src="https://img.shields.io/badge/Computer%20Vision-3D5AFE?style=for-the-badge&logo=opencv&logoColor=white" />
+<a href="mailto:saianandro@gmail.com"><img src="https://img.shields.io/badge/Email-D14836?style=for-the-badge&logo=gmail&logoColor=white" /></a>
+<a href="https://github.com/MarcussRico"><img src="https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=github&logoColor=white" /></a>
+<img src="https://komarev.com/ghpvc/?username=MarcussRico&style=for-the-badge&color=FFB000&label=PROFILE+VIEWS" />
+
+<br/><br/>
+
+<img src="https://img.shields.io/badge/Agentic%20AI-FFB000?style=for-the-badge&logo=robotframework&logoColor=000000" />
+<img src="https://img.shields.io/badge/GenAI-FFB000?style=for-the-badge&logo=googlegemini&logoColor=000000" />
+<img src="https://img.shields.io/badge/RAG-FFB000?style=for-the-badge&logo=databricks&logoColor=000000" />
+<img src="https://img.shields.io/badge/LLMs-FFB000?style=for-the-badge&logo=openai&logoColor=000000" />
+<img src="https://img.shields.io/badge/PyTorch-FFB000?style=for-the-badge&logo=pytorch&logoColor=000000" />
+<img src="https://img.shields.io/badge/Computer%20Vision-FFB000?style=for-the-badge&logo=opencv&logoColor=000000" />
 
 </div>
 
 ---
 
-<img align="right" src="https://github-readme-stats-git-master-rickstaa.vercel.app/api?username=MarcussRico&show_icons=true&hide_border=true&title_color=A970FF&icon_color=A970FF&text_color=c9d1d9&bg_color=0d1117&include_all_commits=true&rank_icon=github" width="420" />
+<div align="center">
 
-### `whoami`
+# `$ whoami`
+
+</div>
 
 ```yaml
 name:      Sai
-role:      2nd-year CSE @ CIT Chennai
+role:      2nd-year Computer Science undergrad
 location:  Chennai, Tamil Nadu, India
 focus:
   - agentic AI systems & multi-agent tool use
   - retrieval-augmented generation (RAG)
-  - LLM application engineering
+  - generative AI / LLM application engineering
   - computer vision & remote sensing
 building:  systems that reason, retrieve,
            and act — not just chat
 ```
 
+<div align="center">
+
 I build applied ML systems end to end — from retrieval and tool orchestration for LLM agents, to vision models for real-world imagery. I care about the parts people skip: honest baselines, ablations that isolate one variable, and writing down what didn't work.
 
-<br clear="right"/>
+</div>
 
 ---
 
@@ -76,7 +82,7 @@ I build applied ML systems end to end — from retrieval and tool orchestration 
 
 <div align="center">
 <a href="https://github.com/MarcussRico/deforestation-sentinel">
-  <img src="https://github-readme-stats-git-master-rickstaa.vercel.app/api/pin/?username=MarcussRico&repo=deforestation-sentinel&hide_border=true&title_color=A970FF&icon_color=A970FF&text_color=c9d1d9&bg_color=0d1117" />
+  <img src="https://github-readme-stats-git-master-rickstaa.vercel.app/api/pin/?username=MarcussRico&repo=deforestation-sentinel&hide_border=true&title_color=FFB000&icon_color=FFB000&text_color=c9d1d9&bg_color=0d1117" />
 </a>
 </div>
 
@@ -173,16 +179,20 @@ The interesting result here is the null one — **attention matches BiLSTM accur
 
 ## Stats
 
-<img src="https://streak-stats.demolab.com?user=MarcussRico&hide_border=true&background=0d1117&stroke=30363d&ring=A970FF&fire=A970FF&currStreakLabel=A970FF&sideLabels=c9d1d9&dates=8b949e&currStreakNum=c9d1d9&sideNums=c9d1d9" width="480" />
-<img src="https://github-readme-stats-git-master-rickstaa.vercel.app/api/top-langs/?username=MarcussRico&layout=compact&hide_border=true&langs_count=8&title_color=A970FF&text_color=c9d1d9&bg_color=0d1117" width="340" />
+<img src="https://github-readme-stats-git-master-rickstaa.vercel.app/api?username=MarcussRico&show_icons=true&hide_border=true&title_color=FFB000&icon_color=FFB000&text_color=c9d1d9&bg_color=0d1117&include_all_commits=true&rank_icon=github" width="420" />
 
 <br/><br/>
 
-<img src="https://github-trophies.vercel.app/?username=MarcussRico&theme=discord&no-frame=true&no-bg=true&row=1&column=7&margin-w=8" width="100%" />
+<img src="https://streak-stats.demolab.com?user=MarcussRico&hide_border=true&background=0d1117&stroke=30363d&ring=FFB000&fire=FFB000&currStreakLabel=FFB000&sideLabels=c9d1d9&dates=8b949e&currStreakNum=c9d1d9&sideNums=c9d1d9" width="480" />
+<img src="https://github-readme-stats-git-master-rickstaa.vercel.app/api/top-langs/?username=MarcussRico&layout=compact&hide_border=true&langs_count=8&hide=javascript,html&title_color=FFB000&text_color=c9d1d9&bg_color=0d1117" width="340" />
+
+<br/><br/>
+
+<img src="https://github-trophies.vercel.app/?username=MarcussRico&theme=onedark&row=1&column=7&margin-w=15" width="100%" />
 
 <br/>
 
-<img src="https://github-readme-activity-graph.vercel.app/graph?username=MarcussRico&bg_color=0d1117&color=c9d1d9&line=A970FF&point=ffffff&area=true&hide_border=true" width="100%" />
+<img src="https://github-readme-activity-graph.vercel.app/graph?username=MarcussRico&bg_color=0d1117&color=c9d1d9&line=FFB000&point=ffffff&area=true&hide_border=true" width="100%" />
 
 <br/>
 
@@ -245,6 +255,6 @@ Clean benchmarks are a starting point, not the goal. The real test is messy, inc
 
 <a href="mailto:saianandro@gmail.com"><img src="https://img.shields.io/badge/saianandro@gmail.com-D14836?style=for-the-badge&logo=gmail&logoColor=white" /></a>
 
-<img src="https://capsule-render.vercel.app/api?type=waving&color=0:1a1a2e,30:24243e,65:302b63,100:0f0c29&height=140&section=footer" width="100%" />
+<img src="https://capsule-render.vercel.app/api?type=waving&color=0:000000,30:0d0d0d,65:1a1a1a,100:000000&height=140&section=footer" width="100%" />
 
 </div>
