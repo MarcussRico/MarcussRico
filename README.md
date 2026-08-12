@@ -173,7 +173,7 @@ The interesting result here is the null one — **attention matches BiLSTM accur
 
 ## Stats
 
-<img src="https://github-readme-stats-git-master-rickstaa.vercel.app/api/streak/?user=MarcussRico&hide_border=true&background=0d1117&stroke=30363d&ring=A970FF&fire=A970FF&currStreakLabel=A970FF&sideLabels=c9d1d9&dates=8b949e&currStreakNum=c9d1d9&sideNums=c9d1d9" width="480" />
+<img src="https://streak-stats.demolab.com?user=MarcussRico&hide_border=true&background=0d1117&stroke=30363d&ring=A970FF&fire=A970FF&currStreakLabel=A970FF&sideLabels=c9d1d9&dates=8b949e&currStreakNum=c9d1d9&sideNums=c9d1d9" width="480" />
 <img src="https://github-readme-stats-git-master-rickstaa.vercel.app/api/top-langs/?username=MarcussRico&layout=compact&hide_border=true&langs_count=8&title_color=A970FF&text_color=c9d1d9&bg_color=0d1117" width="340" />
 
 <br/><br/>
