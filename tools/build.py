@@ -238,64 +238,95 @@ def muon() -> str:
 
 
 def pum2() -> str:
-    W, H = 1000, 380
+    W, H = 1000, 470
     d = load("pum2.json")
+    att = load("pum2_attention.json")
+    w0, w1 = att["window"]
+    cols = w1 - w0
     ds = d["designs"]
     body, css = [], []
     body.append(text("PUM2-attention-vs-IG · research", 40, 64, 13, "mono-medium", HOT))
     body.append(text("Benchmark design decides", 40, 104, 29, "serif", PAPER))
     body.append(text("whether attention is faithful", 40, 138, 29, "italic", PAPER))
     for i, s in enumerate([
-        "One CNN–BiLSTM–attention model, one set of ENCODE",
-        "PUM2 peaks. Change only how the benchmark is built,",
-        "and how often attention lands on PUM2's motif",
-        "UGUANAUA swings from 0.398 to 0.955.",
+        "One CNN–BiLSTM–attention model, one set of",
+        "ENCODE PUM2 peaks. Change only how the",
+        "benchmark is built, and how often attention",
+        "lands on PUM2's motif swings from 0.398 to 0.955.",
     ]):
         body.append(text(s, 40, 178 + i * 22, 15, "serif", DIM))
-    body.append(text("The design that scores best on AUC is the one where", 40, 284, 13, "serif", PAPER))
-    body.append(text("attention is least faithful: shortcuts, not the motif.", 40, 303, 13, "serif", PAPER))
-    body.append(text("attention ≈ integrated gradients (D): 0.955 vs 0.951, p = 0.43", 40, 336, 11, "mono", FAINT))
-    body.append(text("motif shuffle moves predictions ~200× more than a random 8-mer", 40, 352, 11, "mono", FAINT))
+    body.append(text("The best AUC comes from the design where", 40, 284, 13, "serif", PAPER))
+    body.append(text("attention is least faithful: it learned shortcuts.", 40, 303, 13, "serif", PAPER))
+    body.append(text("attention ≈ integrated gradients (D): p = 0.43", 40, 340, 11, "mono", FAINT))
+    body.append(text("motif shuffle: ~200× the effect of a random 8-mer", 40, 356, 11, "mono", FAINT))
+    body.append(text("five seeds per design · ENCODE ENCSR661ICQ, K562", 40, 372, 11, "mono", FAINT))
 
-    # the 2 x 2
-    gx, gy, cw, ch, g = 520, 92, 210, 112, 14
-    cols = ["peak-centred", "random-padded"]
-    rows = ["chromosome", "region-matched"]
-    body.append(text("positives →", gx, gy - 34, 10, "mono", FAINT))
-    for c, name in enumerate(cols):
-        body.append(text(name, gx + c * (cw + g) + cw / 2, gy - 12, 12, "mono", DIM, anchor="middle"))
-    body.append(text("negatives ↓", gx - 40, gy - 34, 10, "mono", FAINT, anchor="end"))
-    for r, name in enumerate(rows):
-        body.append(f'<g transform="rotate(-90 {gx - 32} {gy + r * (ch + g) + ch / 2})">{text(name, gx - 32, gy + r * (ch + g) + ch / 2 + 4, 12, "mono", DIM, anchor="middle")}</g>')
-    order = {("peak-centred", "chromosome"): "A", ("peak-centred", "region-matched"): "B", ("random-padded", "chromosome"): "C", ("random-padded", "region-matched"): "D"}
-    for r, neg in enumerate(rows):
-        for c, pos in enumerate(cols):
-            key = order[(pos, neg)]
-            v = ds[key]
-            x, y = gx + c * (cw + g), gy + r * (ch + g)
-            k = r * 2 + c
-            fillc = magma(0.18 + 0.7 * v["hit"])
-            body.append(f'<g class="cellin" style="animation-delay:{300 + k * 70}ms">')
-            body.append(f'<rect x="{x}" y="{y}" width="{cw}" height="{ch}" rx="10" fill="{fillc}" fill-opacity="0.16" stroke="{fillc}" stroke-opacity="0.55"/>')
-            body.append(text(key, x + 16, y + 28, 13, "mono-medium", DIM))
-            body.append(text(f"{v['hit']:.3f}", x + 16, y + 68, 34, "serif", PAPER))
-            body.append(text(f"± {v['sd']:.3f}", x + 16 + width(f"{v['hit']:.3f} ", 34, "serif"), y + 68, 12, "mono", DIM))
-            body.append(text(f"AUC {v['auc']:.3f}", x + cw - 16, y + 28, 12, "mono", FAINT, anchor="end"))
-            # meter: hit rate on 0..1, with the random-position null marked
-            mx0, my0, mw = x + 16, y + ch - 22, cw - 32
-            body.append(f'<rect x="{mx0}" y="{my0}" width="{mw}" height="6" rx="3" fill="{RULE}"/>')
-            body.append(f'<rect x="{mx0}" y="{my0}" width="{mw * v["hit"]:.1f}" height="6" rx="3" fill="{fillc}" class="meter" style="animation-delay:{650 + k * 90}ms"/>')
-            nx = mx0 + mw * d["null_hit_rate"]
-            body.append(f'<line x1="{nx:.1f}" x2="{nx:.1f}" y1="{my0 - 4}" y2="{my0 + 10}" stroke="{PAPER}" stroke-opacity="0.6"/>')
-            body.append("</g>")
-    body.append(text("motif hit rate · five seeds · tick = random-position null (0.12)", gx + 2 * cw + g, gy + 2 * ch + g + 26, 10, "mono", FAINT, anchor="end"))
+    # geometry of the strips
+    x0, cell = 534, 6.25
+    xs = lambda rel: x0 + (rel - w0) * cell  # noqa: E731
+    top, row_h, spark_h, strip_h = 150, 70, 30, 12
+    gmax = max(max(v["profile"]) for v in att["designs"].values())
+
+    # the motif window, through every row
+    mx0, mx1 = xs(0), xs(8)
+    body.append(f'<rect x="{mx0 - 1:.1f}" y="{top - 46}" width="{mx1 - mx0 + 2:.1f}" height="{4 * row_h + 52}" rx="4" fill="{HOT}" fill-opacity="0.07" stroke="{HOT}" stroke-opacity="0.55" stroke-dasharray="3 3"/>')
+    body.append(text("UGUANAUA", (mx0 + mx1) / 2, top - 52, 10, "mono-medium", HOT, anchor="middle"))
+
+    # one real held-out sequence from design D, letters coloured by that model's attention
+    ex = att["designs"]["D"]["example"]
+    emax = max(ex["attn"])
+    ly = top - 22
+    for rel in range(w0, w1):
+        j = ex["motif_start"] + rel
+        if not 0 <= j < len(ex["seq"]):
+            continue
+        a = ex["attn"][j] / emax
+        ch = ex["seq"][j].replace("T", "U")  # RNA
+        x = xs(rel)
+        if a > 0.08:
+            body.append(f'<rect x="{x + 0.3:.1f}" y="{ly - 11}" width="{cell - 0.6:.1f}" height="15" rx="1.5" fill="{magma(0.25 + 0.75 * a)}" opacity="{0.35 + 0.65 * a:.2f}"/>')
+        ink = BG if a > 0.55 else PAPER if a > 0.25 else FAINT  # dark letters on the brightest cells, so they stay readable
+        body.append(text(ch, x + cell / 2, ly, 9.5, "mono-medium" if a > 0.25 else "mono", ink, anchor="middle"))
+    body.append(text("one held-out sequence (design D, drawn at random): its attention", W - 32, top - 74, 9.5, "mono", FAINT, anchor="end"))
+
+    names = {"A": "centred · chrom.", "B": "centred · matched", "C": "padded · chrom.", "D": "padded · matched"}
+    for r, key in enumerate("ABCD"):
+        prof = att["designs"][key]["profile"]
+        y = top + r * row_h
+        sy = y + spark_h  # sparkline baseline
+        v = ds[key]
+        # labels
+        body.append(text(key, 420, y + 20, 18, "serif-medium", PAPER))
+        body.append(text(f"{v['hit']:.3f}", 440, y + 20, 14, "mono-medium", magma(0.3 + 0.68 * v["hit"])))
+        body.append(text(names[key], 420, y + 36, 9.5, "mono", DIM))
+        body.append(text(f"AUC {v['auc']:.3f}", 420, y + 50, 9.5, "mono", FAINT))
+        # sparkline of the average attention, and the heat strip under it
+        pts = [(xs(w0 + i) + cell / 2, sy - spark_h * (val / gmax)) for i, val in enumerate(prof)]
+        area = f"M{pts[0][0]:.1f} {sy} " + " ".join(f"L{x:.1f} {yy:.1f}" for x, yy in pts) + f" L{pts[-1][0]:.1f} {sy} Z"
+        line = "M" + " L".join(f"{x:.1f} {yy:.1f}" for x, yy in pts)
+        cid = f"row{key}"
+        body.append(f'<clipPath id="{cid}"><rect x="{x0 - 2}" y="{y - 4}" width="{cols * cell + 4:.1f}" height="{row_h}" class="wipe" style="animation-delay:{350 + r * 140}ms"/></clipPath>')
+        cells = "".join(f'<rect x="{xs(w0 + i) + 0.4:.1f}" y="{sy + 4}" width="{cell - 0.8:.1f}" height="{strip_h}" rx="1" fill="{magma(0.06 + 0.94 * math.sqrt(val / gmax))}"/>' for i, val in enumerate(prof))
+        body.append(f'<g clip-path="url(#{cid})"><path d="{area}" fill="{GLOW}" fill-opacity="0.16"/><path d="{line}" fill="none" stroke="{GLOW}" stroke-width="1.4" stroke-linejoin="round"/>{cells}</g>')
+        body.append(f'<line x1="{x0}" x2="{x0 + cols * cell:.1f}" y1="{sy + 0.5}" y2="{sy + 0.5}" stroke="{RULE}"/>')
+
+    # axis
+    ay = top + 4 * row_h + 8
+    for rel in (-30, -20, -10, 0, 10, 20, 30):
+        body.append(text(f"{rel:+d}" if rel else "0", xs(rel) + cell / 2, ay, 9.5, "mono", FAINT, anchor="middle"))
+    body.append(text("nucleotides from the motif · average attention over ~700 held-out test sequences per design (seed 0)", W - 32, ay + 18, 9.5, "mono", FAINT, anchor="end"))
+
+    # the reading cursor
+    span = cols * cell
+    body.append(f'<line x1="{x0}" x2="{x0}" y1="{top - 30}" y2="{top + 4 * row_h - 6}" stroke="{PAPER}" stroke-opacity="0.45" stroke-width="1" class="cursor"/>')
     css.append(f"""
-.cellin {{ animation: fadeup 700ms {EASE_OUT} backwards; }}
-@keyframes fadeup {{ from {{ opacity: 0; transform: translateY(10px); }} }}
-.meter {{ transform-box: fill-box; transform-origin: left; animation: grow 1100ms {EASE_OUT} backwards; }}
-@keyframes grow {{ from {{ transform: scaleX(0.02); }} }}
+.wipe {{ transform-box: fill-box; transform-origin: left; animation: wipe 1600ms {EASE_IN_OUT} backwards; }}
+@keyframes wipe {{ from {{ transform: scaleX(0.001); }} }}
+.cursor {{ opacity: 0; animation: cursor 7s linear 2.4s infinite; }}
+@keyframes cursor {{ 0% {{ opacity: 0; transform: translateX(0px); }} 4% {{ opacity: 1; }} 92% {{ opacity: 1; }} 100% {{ opacity: 0; transform: translateX({span:.1f}px); }} }}
 """)
-    return document(W, H, "\n".join(body), "\n".join(css), "Benchmark design decides whether attention is faithful", "A 2 by 2 grid of benchmark designs for PUM2 binding-site models. Attention motif hit rate: A 0.398, B 0.799, C 0.921, D 0.955, while AUC runs the other way, from 0.803 in A to 0.695 in D.")
+    return document(W, H, "\n".join(body), "\n".join(css), "Benchmark design decides whether attention is faithful",
+                    "Four rows, one per benchmark design, show the average attention of a trained CNN-BiLSTM-attention model along held-out sequences, aligned on PUM2's UGUANAUA motif. In design D attention concentrates on the motif (hit rate 0.955); in design A it is diffuse (0.398), while AUC runs the other way, 0.695 in D and 0.803 in A. Above, one held-out RNA sequence with its attention.")
 
 
 # ═════════════════════════ shared: a loss chart that draws itself ═════════════════════════
@@ -488,7 +519,175 @@ def gpt2() -> str:
     return document(W, H, "\n".join(body), "\n".join(css), "gpt2-from-scratch", f"GPT-2 written by hand in PyTorch. With OpenAI's weights its logits match the reference to {check['max_abs_logit_diff']:.1e}, greedy output is identical, and the KV cache changes nothing. Trained from scratch on Shakespeare it reaches validation loss {run['val'][-1]:.2f}.")
 
 
-FIGURES = {"hero": hero, "hero_phone": hero_phone, "muon": muon, "pum2": pum2, "autograd": autograd, "gpt2": gpt2}
+# ═════════════════════════ physio-forensics ═════════════════════════
+
+
+def _spread_for(plv: float) -> float:
+    """The spread s for four phases at offsets (-1.5, -0.5, 0.5, 1.5)·s whose mean vector has length plv."""
+    lo, hi = 0.0, 1.9
+    for _ in range(60):
+        mid = (lo + hi) / 2
+        r = (math.cos(1.5 * mid) + math.cos(0.5 * mid)) / 2
+        lo, hi = (mid, hi) if r > plv else (lo, mid)
+    return (lo + hi) / 2
+
+
+def physio() -> str:
+    W, H = 1000, 420
+    d = load("physio.json")
+    body, css = [], []
+    body.append(text("physio-forensics · research", 40, 64, 13, "mono-medium", HOT))
+    body.append(text("A deepfake detector that", 40, 104, 29, "serif", PAPER))
+    body.append(text("checks for a heartbeat", 40, 138, 29, "italic", PAPER))
+    for i, s in enumerate([
+        "Every heartbeat tints the skin by a fraction no eye",
+        "can see. A real face carries one pulse, in step across",
+        "forehead, cheeks and neck. A generator can fake a",
+        "pulse in one patch; keeping four in phase is harder.",
+    ]):
+        body.append(text(s, 40, 178 + i * 22, 15, "serif", DIM))
+    body.append(text("The incoherent forgery has a cleaner pulse than real", 40, 284, 13, "serif", PAPER))
+    body.append(text("video (SNR 13.5 vs 13.1 dB). Only phase catches it.", 40, 303, 13, "serif", PAPER))
+    body.append(text("classical rPPG (POS/CHROM) in NumPy · no GPU · 22 tests", 40, 340, 11, "mono", FAINT))
+    body.append(text("synthetic video with known physiology; real-corpus tests pending", 40, 356, 11, "mono", FAINT))
+
+    # five dials: the four regions' phases turn together with the heartbeat; the arrow is their mean
+    r, y0 = 30, 108
+    xs = [520 + i * 98 for i in range(5)]
+    body.append(text("phase of the pulse in four skin regions · arrow length = phase-locking value", 960, 58, 10, "mono", FAINT, anchor="end"))
+    for i, (c, x) in enumerate(zip(d["classes"], xs)):
+        s = _spread_for(c["plv"])
+        ring = GLOW if c["name"] == "incoherent" else RULE
+        body.append(f'<circle cx="{x}" cy="{y0}" r="{r}" fill="#1A1225" stroke="{ring}" stroke-width="{1.6 if ring == GLOW else 1}"/>')
+        body.append(f'<circle cx="{x}" cy="{y0}" r="1.6" fill="{FAINT}"/>')
+        dots = []
+        for k, o in enumerate((-1.5, -0.5, 0.5, 1.5)):
+            a = -math.pi / 2 + o * s
+            dots.append(f'<circle cx="{x + r * math.cos(a):.1f}" cy="{y0 + r * math.sin(a):.1f}" r="4" fill="{magma(0.5 + 0.12 * k)}"/>')
+        arrow_len = r * c["plv"]
+        colour = GLOW if c["plv"] > 0.9 else magma(0.62)
+        arrow = f'<line x1="{x}" y1="{y0}" x2="{x}" y2="{y0 - arrow_len:.1f}" stroke="{colour}" stroke-width="2.4" stroke-linecap="round"/>'
+        body.append(f'<g class="beat" style="transform-origin:{x}px {y0}px">{"".join(dots)}{arrow}</g>')
+        body.append(text(c["name"], x, y0 + r + 22, 11, "mono-medium", PAPER if c["name"] in ("real", "incoherent") else DIM, anchor="middle"))
+        body.append(text(f"PLV {c['plv']:.3f}", x, y0 + r + 38, 11, "mono", GLOW if c["name"] == "real" else DIM, anchor="middle"))
+        body.append(text(f"SNR {c['snr']:+.1f}", x, y0 + r + 53, 10, "mono", FAINT, anchor="middle"))
+
+    # leave-one-generator-out: train without one forgery method, test on it blind
+    bx, by, bw = 600, 252, 330
+    body.append(text("AUC on a forgery method never seen in training", 960, by - 14, 10, "mono", FAINT, anchor="end"))
+    for i, row in enumerate(d["logo_auc"]):
+        y = by + i * 24
+        label = row["held_out"]
+        body.append(text(label, bx - 12, y + 9, 11, "mono-medium" if label == "mean" else "mono", PAPER if label == "mean" else DIM, anchor="end"))
+        body.append(f'<rect x="{bx}" y="{y}" width="{bw}" height="5" rx="2.5" fill="{RULE}"/>')
+        body.append(f'<rect x="{bx}" y="{y}" width="{bw * row["quality"]:.1f}" height="5" rx="2.5" fill="{magma(0.45)}" class="meter" style="animation-delay:{500 + i * 70}ms"/>')
+        body.append(f'<rect x="{bx}" y="{y + 8}" width="{bw}" height="5" rx="2.5" fill="{RULE}"/>')
+        body.append(f'<rect x="{bx}" y="{y + 8}" width="{bw * row["coherence"]:.1f}" height="5" rx="2.5" fill="{GLOW}" class="meter" style="animation-delay:{560 + i * 70}ms"/>')
+        body.append(text(f"{row['coherence']:.3f}", bx + bw + 8, y + 13, 10, "mono-medium", GLOW))
+        body.append(text(f"{row['quality']:.3f}", bx + bw + 8, y + 4, 9, "mono", FAINT))
+    ly = by + 5 * 24 + 10
+    body.append(f'<rect x="{bx}" y="{ly - 7}" width="14" height="5" rx="2.5" fill="{magma(0.45)}"/>')
+    body.append(text("signal-quality features", bx + 20, ly, 10, "mono", DIM))
+    body.append(f'<rect x="{bx + 176}" y="{ly - 7}" width="14" height="5" rx="2.5" fill="{GLOW}"/>')
+    body.append(text("phase-coherence features", bx + 196, ly, 10, "mono", DIM))
+
+    css.append(f"""
+.beat {{ animation: beat 2.6s linear infinite; }}
+@keyframes beat {{ to {{ transform: rotate(360deg); }} }}
+.meter {{ transform-box: fill-box; transform-origin: left; animation: grow 1100ms {EASE_OUT} backwards; }}
+@keyframes grow {{ from {{ transform: scaleX(0.02); }} }}
+""")
+    return document(W, H, "\n".join(body), "\n".join(css), "physio-forensics", "Five dials show the pulse phase in four skin regions for real video and four forgery types; the arrow's length is the phase-locking value: real 0.998, nopulse 0.645, incoherent 0.416, drifting 0.287, swap 0.185. Bars compare AUC on an unseen forgery method: phase-coherence features average 0.981, signal-quality features 0.866.")
+
+
+# ═════════════════════════ warden: the orchestration ═════════════════════════
+
+
+def warden() -> str:
+    W, H = 1000, 430
+    d = load("warden.json")
+    body, css = [], []
+    body.append(text("warden · Freshworks hackathon", 40, 64, 13, "mono-medium", HOT))
+    body.append(text("Agents that argue,", 40, 104, 29, "serif", PAPER))
+    body.append(text("and code that checks them", 40, 138, 29, "italic", PAPER))
+    for i, s in enumerate([
+        "Quarterly access reviews for Freshservice. A rules",
+        "engine decides everything it can; Claude agents take",
+        "only the risks that hinge on what someone wrote in a",
+        "ticket, and nothing they say is trusted unchecked.",
+    ]):
+        body.append(text(s, 40, 178 + i * 22, 15, "serif", DIM))
+    stats = [(f"{d['planted']} / {d['planted']}", "planted risks found"), (str(d["false_alarms"]), "false alarms"), (f"{d['by_agents']} / {d['by_agents']}", "agent calls verified")]
+    for i, (num, label) in enumerate(stats):
+        y = 290 + i * 26
+        body.append(text(num, 40, y, 15, "mono-medium", GLOW, cls="fade", style=f"animation-delay:{2600 + i * 120}ms"))
+        body.append(text(label, 40 + width(num + "  ", 15, "mono-medium"), y, 13, "mono", DIM, cls="fade", style=f"animation-delay:{2600 + i * 120}ms"))
+    body.append(text("the AI never removes access: it recommends, a person decides", 40, 382, 11, "mono", FAINT))
+
+    # nodes: (x, y, title, subtitle, kind)
+    N = {
+        "lines": (0, 92, f"{d['lines']:,} access lines", "Okta, AWS, Stripe…", "data"),
+        "engine": (0, 92, "rules engine", "no AI · every line", "code"),
+        "rules": (0, 92, f"{d['by_rules']} decided", "by rules alone", "out"),
+        "inv": (0, 212, "investigator", "Sonnet · must quote", "agent"),
+        "check": (0, 212, "code check", "verifies quotes", "code"),
+        "chal": (0, 212, "challenger", "Opus · argues back", "agent"),
+        "brief": (0, 330, "briefer", "Haiku · writes briefs", "agent"),
+        "mgr": (0, 330, "manager", "decides, own team", "person"),
+        "it": (0, 330, "IT executes", "in Freshservice", "out"),
+    }
+    edges = [("lines", "engine", 0), ("engine", "rules", 1), ("engine", "inv", 1), ("inv", "check", 2), ("check", "chal", 3), ("chal", "mgr", 4), ("brief", "mgr", 4), ("mgr", "it", 5)]
+    size = {k: max(width(v[2], 12, "mono-medium"), width(v[3], 9.5, "mono")) + 24 for k, v in N.items()}
+    # lay each row out evenly between x = 470 and 965
+    for row in (("lines", "engine", "rules"), ("inv", "check", "chal"), ("brief", "mgr", "it")):
+        gap = (965 - 470 - sum(size[k] for k in row)) / (len(row) - 1)
+        x = 470.0
+        for k in row:
+            N[k] = (x + size[k] / 2, *N[k][1:])
+            x += size[k] + gap
+
+    def box(k):
+        x, y = N[k][0], N[k][1]
+        w = size[k]
+        return x - w / 2, y - 22, w, 44
+
+    def anchor(a, b):
+        ax, ay, aw, ah = box(a)
+        bx_, by_, bw_, bh = box(b)
+        acx, acy, bcx, bcy = ax + aw / 2, ay + ah / 2, bx_ + bw_ / 2, by_ + bh / 2
+        if abs(acy - bcy) < 5:  # same row: right edge to left edge
+            return (ax + aw, acy) if bcx > acx else (ax, acy), (bx_, bcy) if bcx > acx else (bx_ + bw_, bcy)
+        return (acx, ay + ah) if bcy > acy else (acx, ay), (bcx, by_) if bcy > acy else (bcx, by_ + bh)
+
+    for a, b, _ in edges:
+        (sx, sy), (ex, ey) = anchor(a, b)
+        body.append(f'<path d="M{sx:.1f} {sy:.1f} L{ex:.1f} {ey:.1f}" stroke="{FAINT}" stroke-width="1.2" fill="none"/>')
+    body.append(text(f"{d['by_agents']} hinge on a ticket", (N["engine"][0] + N["inv"][0]) / 2 + 14, 156, 10, "mono", GLOW))
+    for k, (x, y, title, sub, kind) in N.items():
+        bx_, by_, bw_, bh = box(k)
+        stroke = {"agent": magma(0.62), "code": FAINT, "data": RULE, "out": RULE, "person": GLOW}[kind]
+        fill = {"agent": "#2A1830", "code": "#1E1629", "data": "#181020", "out": "#181020", "person": "#2B2018"}[kind]
+        body.append(f'<rect x="{bx_:.1f}" y="{by_:.1f}" width="{bw_:.1f}" height="{bh}" rx="10" fill="{fill}" stroke="{stroke}"/>')
+        body.append(text(title, x, y - 3, 12, "mono-medium", PAPER, anchor="middle"))
+        body.append(text(sub, x, y + 13, 9.5, "mono", DIM, anchor="middle"))
+
+    # pulses: the work moving through the system, one hop after another
+    cycle, hop = 7.0, 0.55
+    for i, (a, b, k) in enumerate(edges):
+        (sx, sy), (ex, ey) = anchor(a, b)
+        t0 = 0.4 + k * hop
+        s0, s1 = t0 / cycle * 100, (t0 + hop) / cycle * 100
+        colour = GLOW if N[a][4] == "agent" or N[b][4] == "agent" else magma(0.55)
+        css.append(f"@keyframes w{i} {{ 0%, {s0:.2f}% {{ opacity: 0; transform: translate(0px, 0px); }} {s0 + 0.6:.2f}% {{ opacity: 1; }} {s1:.2f}% {{ opacity: 1; transform: translate({ex - sx:.1f}px, {ey - sy:.1f}px); }} {s1 + 1.5:.2f}%, 100% {{ opacity: 0; transform: translate({ex - sx:.1f}px, {ey - sy:.1f}px); }} }}")
+        body.append(f'<circle cx="{sx:.1f}" cy="{sy:.1f}" r="4" fill="{colour}" style="opacity:0;animation: w{i} {cycle}s {EASE_IN_OUT} infinite"/>')
+    css.append(f"""
+.fade {{ animation: fade 700ms {EASE_OUT} backwards; }}
+@keyframes fade {{ from {{ opacity: 0; }} }}
+""")
+    return document(W, H, "\n".join(body), "\n".join(css), "Warden: orchestrated agents for access reviews", "Flow diagram: 1,922 access lines go through a rules engine with no AI, which decides 159 risks; the 23 that hinge on a ticket go to an investigator agent (Claude Sonnet) that must quote the ticket, a code check that verifies every quote, and a challenger agent (Claude Opus) that argues back; a briefer agent (Claude Haiku) summarises for the manager, who decides, and IT executes in Freshservice. 182 of 182 planted risks found, 0 false alarms, 23 of 23 agent calls verified.")
+
+
+FIGURES = {"hero": hero, "hero_phone": hero_phone, "muon": muon, "pum2": pum2, "autograd": autograd, "gpt2": gpt2, "physio": physio, "warden": warden}
 
 
 def main(names):

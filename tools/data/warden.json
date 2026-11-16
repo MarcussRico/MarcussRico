@@ -1,0 +1,4 @@
+{
+ "source": "github.com/MarcussRico/warden README (test company Northwind Pay, sealed answer key)",
+ "lines": 1922, "decisions": 177, "planted": 182, "by_rules": 159, "by_agents": 23, "false_alarms": 0
+}

@@ -1,0 +1,17 @@
+{
+ "source": "github.com/MarcussRico/physio-forensics README: `physioforensics.cli selftest` (synthetic video with known physiology) and the leave-one-generator-out AUC table",
+ "classes": [
+  {"name": "real", "plv": 0.998, "snr": 13.13},
+  {"name": "nopulse", "plv": 0.645, "snr": -3.42},
+  {"name": "incoherent", "plv": 0.416, "snr": 13.53},
+  {"name": "drifting", "plv": 0.287, "snr": -1.14},
+  {"name": "swap", "plv": 0.185, "snr": 1.56}
+ ],
+ "logo_auc": [
+  {"held_out": "nopulse", "quality": 1.000, "coherence": 1.000},
+  {"held_out": "drifting", "quality": 1.000, "coherence": 1.000},
+  {"held_out": "swap", "quality": 0.890, "coherence": 1.000},
+  {"held_out": "incoherent", "quality": 0.575, "coherence": 0.925},
+  {"held_out": "mean", "quality": 0.866, "coherence": 0.981}
+ ]
+}
