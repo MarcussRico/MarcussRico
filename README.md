@@ -1,7 +1,7 @@
 <a href="https://github.com/MarcussRico"><picture><source media="(max-width: 600px)" srcset="assets/hero_phone.svg"><img src="assets/hero.svg" width="100%" alt="Sai Charan A. I build neural networks from the chain rule up: autograd, GPT-2 and optimisers written from scratch, and research on when attention can be trusted. Beside it, real GPT-2 attention weights computed by my own implementation."></picture></a>
 
 <p align="center">
-<a href="mailto:saianandro@gmail.com"><b>saianandro@gmail.com</b></a> &nbsp;·&nbsp; Chennai, India &nbsp;·&nbsp; open to AI engineering roles and research collaborations
+<a href="mailto:saianandro@gmail.com"><b>saianandro@gmail.com</b></a> &nbsp;·&nbsp; Chennai, India
 </p>
 
 I learn a method by building it until it matches the reference to float precision, then I use it on messy real data: RNA-binding sites, rPPG pulse signals, Sentinel-2 imagery, access-review logs. I care about the parts people skip: honest baselines, one variable at a time, and writing down what didn't work.
