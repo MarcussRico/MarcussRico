@@ -1,0 +1,12 @@
+{
+ "source": "github.com/MarcussRico/PUM2-attention-vs-IG: README (hit rates, five seeds) and outputs*/results_log.csv (cnn_lstm_attention test AUC-ROC, five seeds)",
+ "null_hit_rate": 0.12,
+ "designs": {
+  "A": {"positives": "peak-centred", "negatives": "chromosome", "hit": 0.398, "sd": 0.203, "auc": 0.803},
+  "B": {"positives": "peak-centred", "negatives": "region-matched", "hit": 0.799, "sd": 0.080, "auc": 0.752},
+  "C": {"positives": "random-padded", "negatives": "chromosome", "hit": 0.921, "sd": 0.044, "auc": 0.759},
+  "D": {"positives": "random-padded", "negatives": "region-matched", "hit": 0.955, "sd": 0.015, "auc": 0.695}
+ },
+ "ig_vs_attention_D": {"attention": 0.955, "ig": 0.951, "p": 0.43},
+ "occlusion_specificity": "~200x"
+}

@@ -1,260 +1,84 @@
-<div align="center">
+<a href="https://github.com/MarcussRico"><picture><source media="(max-width: 600px)" srcset="assets/hero_phone.svg"><img src="assets/hero.svg" width="100%" alt="Sai Charan A. I build neural networks from the chain rule up: autograd, GPT-2 and optimisers written from scratch, and research on when attention can be trusted. Beside it, real GPT-2 attention weights computed by my own implementation."></picture></a>
 
-<img src="https://capsule-render.vercel.app/api?type=waving&color=0:000000,35:1a1a1a,70:0d0d0d,100:000000&height=260&section=header&text=Sai&fontSize=90&fontColor=ffffff&animation=twinkling&fontAlignY=32&desc=Agentic%20AI%20%E2%80%A2%20GenAI%20%E2%80%A2%20RAG%20%E2%80%A2%20LLMs%20%E2%80%A2%20PyTorch%20%E2%80%A2%20Computer%20Vision&descAlignY=52&descSize=16&descColor=FFB000" width="100%" />
+<p align="center">
+<a href="mailto:saianandro@gmail.com"><b>saianandro@gmail.com</b></a> &nbsp;·&nbsp; Chennai, India &nbsp;·&nbsp; open to AI engineering roles and research collaborations
+</p>
 
-<img src="https://raw.githubusercontent.com/MarcussRico/MarcussRico/main/ticker.svg" alt="scrolling ticker" width="900" />
+I learn a method by building it until it matches the reference to float precision, then I use it on messy real data: RNA-binding sites, rPPG pulse signals, Sentinel-2 imagery, access-review logs. I care about the parts people skip: honest baselines, one variable at a time, and writing down what didn't work.
 
-<br/><br/>
+## From first principles
 
-<a href="mailto:saianandro@gmail.com"><img src="https://img.shields.io/badge/Email-D14836?style=for-the-badge&logo=gmail&logoColor=white" /></a>
-<a href="https://github.com/MarcussRico"><img src="https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=github&logoColor=white" /></a>
-<img src="https://komarev.com/ghpvc/?username=MarcussRico&style=for-the-badge&color=FFB000&label=PROFILE+VIEWS" />
+<a href="https://github.com/MarcussRico/autograd-from-scratch"><img src="assets/autograd.svg" width="100%" alt="autograd-from-scratch: a reverse-mode autograd engine in about 200 lines of NumPy. Every gradient is tested against PyTorch, and it trains a character-level GPT on Shakespeare with no PyTorch at all."></a>
 
-<br/><br/>
+<a href="https://github.com/MarcussRico/gpt2-from-scratch"><img src="assets/gpt2.svg" width="100%" alt="gpt2-from-scratch: GPT-2 written by hand in PyTorch. With OpenAI's 124M weights its logits match the reference to 1.8e-4 and its greedy output is identical; trained from scratch on Shakespeare on an Apple M5 GPU."></a>
 
-<img src="https://img.shields.io/badge/Agentic%20AI-FFB000?style=for-the-badge&logo=robotframework&logoColor=000000" />
-<img src="https://img.shields.io/badge/GenAI-FFB000?style=for-the-badge&logo=googlegemini&logoColor=000000" />
-<img src="https://img.shields.io/badge/RAG-FFB000?style=for-the-badge&logo=databricks&logoColor=000000" />
-<img src="https://img.shields.io/badge/LLMs-FFB000?style=for-the-badge&logo=openai&logoColor=000000" />
-<img src="https://img.shields.io/badge/PyTorch-FFB000?style=for-the-badge&logo=pytorch&logoColor=000000" />
-<img src="https://img.shields.io/badge/Computer%20Vision-FFB000?style=for-the-badge&logo=opencv&logoColor=000000" />
+<a href="https://github.com/MarcussRico/muon-newtonschulz"><img src="assets/muon.svg" width="100%" alt="muon-newtonschulz: the singular values of an update pulled into Muon's target band by five quintic Newton-Schulz iterations, using only matrix multiplies."></a>
 
-</div>
+**[backprop-from-scratch](https://github.com/MarcussRico/backprop-from-scratch)** came before the autograd engine: every layer's backward pass derived on paper and coded by hand in NumPy, then checked against finite differences (largest relative error 4.9 × 10⁻¹⁰). **[multiple-linear-regression-numpy](https://github.com/MarcussRico/multiple-linear-regression-numpy)** is closed-form least squares from the derivation.
 
----
+## Research
 
-<div align="center">
+<a href="https://github.com/MarcussRico/PUM2-attention-vs-IG"><img src="assets/pum2.svg" width="100%" alt="Benchmark design decides whether attention is faithful. Attention motif hit rate across four benchmark designs: 0.398, 0.799, 0.921 and 0.955, while AUC runs the other way, from 0.803 to 0.695."></a>
 
-# `$ whoami`
+Attention weights are often read as an explanation. I trained the same CNN–BiLSTM–attention model on four benchmarks built from the same ENCODE PUM2 peaks, changing only two conventional design choices. How often attention points at the protein's known motif moved from 0.398 to 0.955, and a causal occlusion test showed the model relies on the motif in every design. So the low score is genuine unfaithfulness, created by the benchmark, not by the model. In the best design, attention and Integrated Gradients are statistically indistinguishable (p = 0.43). [Code, data and logs →](https://github.com/MarcussRico/PUM2-attention-vs-IG)
 
-</div>
+## Shipped systems
 
-```yaml
-name:      Sai
-role:      2nd-year Computer Science undergrad
-location:  Chennai, Tamil Nadu, India
-focus:
-  - agentic AI systems & multi-agent tool use
-  - retrieval-augmented generation (RAG)
-  - generative AI / LLM application engineering
-  - computer vision & remote sensing
-building:  systems that reason, retrieve,
-           and act — not just chat
-```
-
-<div align="center">
-
-I build applied ML systems end to end — from retrieval and tool orchestration for LLM agents, to vision models for real-world imagery. I care about the parts people skip: honest baselines, ablations that isolate one variable, and writing down what didn't work.
-
-</div>
-
----
-
-<div align="center">
-
-## Tech Stack
-
-<img src="https://skillicons.dev/icons?i=python,pytorch,tensorflow,sklearn,opencv,cpp,js,cs,fastapi,sqlite,git,linux,docker,unity,blender,vscode&perline=8" />
-
-<br/><br/>
-
-<img src="https://img.shields.io/badge/LangChain-1C3C3C?style=flat-square&logo=langchain&logoColor=white" />
-<img src="https://img.shields.io/badge/LlamaIndex-000000?style=flat-square&logo=llama&logoColor=white" />
-<img src="https://img.shields.io/badge/Pinecone-000000?style=flat-square&logo=pinecone&logoColor=white" />
-<img src="https://img.shields.io/badge/FAISS-00599C?style=flat-square&logo=meta&logoColor=white" />
-<img src="https://img.shields.io/badge/OpenAI%20API-412991?style=flat-square&logo=openai&logoColor=white" />
-<img src="https://img.shields.io/badge/Anthropic%20Claude-D97757?style=flat-square&logo=anthropic&logoColor=white" />
-<img src="https://img.shields.io/badge/Groq-F55036?style=flat-square&logo=groq&logoColor=white" />
-<img src="https://img.shields.io/badge/Hugging%20Face-FFD21E?style=flat-square&logo=huggingface&logoColor=black" />
-<img src="https://img.shields.io/badge/PyTorch-EE4C2C?style=flat-square&logo=pytorch&logoColor=white" />
-<img src="https://img.shields.io/badge/NumPy-013243?style=flat-square&logo=numpy&logoColor=white" />
-<img src="https://img.shields.io/badge/pandas-150458?style=flat-square&logo=pandas&logoColor=white" />
-<img src="https://img.shields.io/badge/BeautifulSoup-59666C?style=flat-square&logo=python&logoColor=white" />
-<img src="https://img.shields.io/badge/CUDA-76B900?style=flat-square&logo=nvidia&logoColor=white" />
-<img src="https://img.shields.io/badge/GDAL-5CAE58?style=flat-square&logo=qgis&logoColor=white" />
-<img src="https://img.shields.io/badge/Sentinel--2-0B3D91?style=flat-square&logo=esa&logoColor=white" />
-
-</div>
-
----
-
-## Featured Work
-
-<div align="center">
-<a href="https://github.com/MarcussRico/deforestation-sentinel">
-  <img src="https://github-readme-stats-git-master-rickstaa.vercel.app/api/pin/?username=MarcussRico&repo=deforestation-sentinel&hide_border=true&title_color=FFB000&icon_color=FFB000&text_color=c9d1d9&bg_color=0d1117" />
-</a>
-</div>
-
-<br/>
-
-<details open>
-<summary><b>🤖 &nbsp;Data Analysis Harness — agent architecture for unseen datasets</b></summary>
-
-<br/>
-
-A harness that lets an LLM agent explore a dataset it has never seen, safely:
-
-- **Sandboxed execution** — generated code runs isolated, not in the host process
-- **Long-horizon memory** — findings persist across turns instead of falling out of context
-- **Self-healing** — tool errors feed back as structured signal, the agent retries with a corrected call
-- **Approval gates** — human in the loop before anything destructive runs
-
-`Python` `tool-calling` `sandboxing` `agent-loops`
-
-</details>
-
-<details open>
-<summary><b>🍜 &nbsp;Recipe Scraper — dataset pipeline for a food-focused LLM app</b></summary>
-
-<br/>
-
-Built a scraper to collect **~1,000,000 recipes** from sources like Yelp and Uber Eats Canada, cleaned and structured into a corpus feeding a food-focused LLM/RAG application — grounding generated recommendations in real menu and recipe data instead of the model's raw priors.
-
-`Python` `BeautifulSoup` `web scraping` `data pipelines` `RAG corpus`
-
-</details>
-
-<details open>
-<summary><b>🛰️ &nbsp;Deforestation Sentinel — satellite forest-loss detection</b></summary>
-
-<br/>
-
-| | |
-|---|---|
-| **Model** | ResNet50 transfer learning on EuroSAT |
-| **Val accuracy** | `95.65%` |
-| **Test accuracy** | `95.26%` |
-| **Forest F1** | `0.9672` |
-| **Real data** | Sentinel-2 L2A, AOI near Machadinho D'Oeste, Rondônia, Brazil |
-| **Result** | 10 / 72 patches flagged Forest → non-forest (~410 ha estimated) |
-| **Status** | Global Forest Watch alert cross-validation in progress |
-
-A change-detection pipeline that goes from raw Sentinel-2 tiles to a ranked list of suspected clearing events. An earlier hackathon build wrapped the classifier in a multi-agent pipeline — **Baseline → Watcher → Triage → Escalation** — so alerts route themselves by severity instead of dumping into one queue.
-
-`PyTorch` `ResNet50` `rasterio` `GDAL` `Sentinel-2` `OpenSwarm`
-
-</details>
-
-<details>
-<summary><b>🧬 &nbsp;RNA-Binding Protein Binding Site Prediction <i>(one-off bioinformatics project)</i></b></summary>
-
-<br/>
-
-Predicting PUM2 binding sites directly from raw genomic sequence, trained on ENCODE eCLIP-seq data (`ENCSR661ICQ`, K562 cells).
-
-| Architecture | ROC-AUC |
-|---|---|
-| Baseline CNN | `0.7473` |
-| CNN + BiLSTM | `0.8206` |
-| CNN + BiLSTM + Attention | `0.8197` |
-
-The interesting result here is the null one — **attention matches BiLSTM accuracy while adding interpretable per-position weights at zero performance cost.** That makes interpretability free rather than a tradeoff.
-
-`PyTorch` `pysam` `bedtools` `hg38` `eCLIP-seq`
-
-</details>
-
-<details>
-<summary><b>🗂️ &nbsp;Earlier projects</b></summary>
-
-<br/>
-
-| Project | What it does | Stack |
+| | What it does | Highlights |
 |---|---|---|
-| **Aide** | AI daily assistant — function-calling tools, whiteboard-photo → task extraction via vision, neural TTS | FastAPI, Groq, SQLite, vanilla JS |
-| **Medical RAG Chatbot** | Retrieval-augmented QA over medical literature with grounded, cited answers | LLaMA 3.3, Groq, Pinecone, LangChain |
-| **Gesture-Controlled Mouse** | Real-time cursor control from hand tracking on a standard webcam | MediaPipe, OpenCV |
-| **Sign Language Detection** | CNN classifier for static sign recognition from video frames | TensorFlow, OpenCV |
-| **Monocular Depth Estimation** | Dense depth maps from a single RGB image | MiDaS, PyTorch |
-| **PDF Parser** | Structured extraction from unstructured PDFs, served over an API | pdfplumber, FastAPI |
-| **Games** | Unity titles in C#, browser games in JS, 3D asset work | Unity, C#, JS, Blender |
-| **MultipleLinearRegression** | Closed-form OLS written from scratch — reading the derivation and implementing it are not the same thing | NumPy |
+| **[Warden](https://github.com/MarcussRico/warden)** <br><sub>Freshworks hackathon</sub> | Access reviews for Freshservice that actually review: a rules engine, AI agents whose quotes are verified by code, a second agent that argues back, role-based decisions | **182 / 182** planted risks found, **0** false alarms. The rules engine alone catches 159; AI handles only the 23 that need reading a ticket. [Live](https://warden-psi-mauve.vercel.app) |
+| **[Allowance](https://github.com/MarcussRico/allowance)** <br><sub>PayPal AI Hackathon</sub> | Spending limits for AI agents: a Claude agent with three strict tools pays through PayPal Vault and Orders inside caps the owner sets, and holds anything else for a press-and-hold approval. Also an MCP server | Limits enforced by the rules engine, not by trusting the model; idempotent charges. [Live](https://allowance-23yv.onrender.com) |
+| **[ANAMNESIS](https://github.com/MarcussRico/anamnesis-medical-chatbot)** | Bayesian symptom triage that asks the yes/no question with the highest expected information gain, with no generative model anywhere | **96.3%** correct after about **4** questions (random questions: 79.4% after 7.9); calibration error 0.035; found that all 41 official test rows also appear in training. [Live](https://anamnesis-theta.vercel.app) |
+| **[physio-forensics](https://github.com/MarcussRico/physio-forensics)** | Deepfake detection that never asks whether a face looks fake: it checks for one shared cardiac pulse, with the right transit delays, across four skin regions (rPPG) | A generator can fake a pulse in one patch; phase coherence across the forehead, cheeks and an untouched neck is much harder. [Demo](https://github.com/MarcussRico/physio-forensics-website) |
+| **[FLIGHTLINE](https://github.com/MarcussRico/flightline)** <br><sub>Smart India Hackathon, SIH26249</sub> | A fleet availability twin: joins health monitoring, records, spares and MRO into one graph, simulates the fleet day by day and optimises sortie-days with CP-SAT | Offline and deterministic; a scenario re-solves in about a second; 77 tests |
+| **[LedgerLens](https://github.com/MarcussRico/LedgerLens)** | Procurement forensics: 42 detectors across 5 pillars | Rules and statistics compute; the LLM only explains and drafts |
+| **[Deforestation Sentinel](https://github.com/MarcussRico/Deforestation-Sentinel)** | ResNet50 fine-tuned on EuroSAT, run on real Sentinel-2 tiles over Rondônia, Brazil | **95.26%** test accuracy; 10 of 72 patches flagged forest → non-forest (about 410 ha) |
 
-</details>
+## A year of work
 
----
+<img src="assets/contrib3d.svg" width="100%" alt="My GitHub contributions over the last year as a 3D bar chart, redrawn every day.">
 
-<div align="center">
+<sub>Redrawn every morning from the live contribution calendar by <a href=".github/workflows/contrib3d.yml">a workflow</a>; the figures are generated by <a href="tools">tools/</a> from real runs and results.</sub>
 
-## Stats
-
-<img src="https://github-readme-stats-git-master-rickstaa.vercel.app/api?username=MarcussRico&show_icons=true&hide_border=true&title_color=FFB000&icon_color=FFB000&text_color=c9d1d9&bg_color=0d1117&include_all_commits=true&rank_icon=github" width="420" />
-
-<br/><br/>
-
-<img src="https://streak-stats.demolab.com?user=MarcussRico&hide_border=true&background=0d1117&stroke=30363d&ring=FFB000&fire=FFB000&currStreakLabel=FFB000&sideLabels=c9d1d9&dates=8b949e&currStreakNum=c9d1d9&sideNums=c9d1d9" width="480" />
-<img src="https://github-readme-stats-git-master-rickstaa.vercel.app/api/top-langs/?username=MarcussRico&layout=compact&hide_border=true&langs_count=8&hide=javascript,html&title_color=FFB000&text_color=c9d1d9&bg_color=0d1117" width="340" />
-
-<br/><br/>
-
-<img src="https://github-trophies.vercel.app/?username=MarcussRico&theme=onedark&row=1&column=7&margin-w=15" width="100%" />
-
-<br/>
-
-<img src="https://github-readme-activity-graph.vercel.app/graph?username=MarcussRico&bg_color=0d1117&color=c9d1d9&line=FFB000&point=ffffff&area=true&hide_border=true" width="100%" />
-
-<br/>
-
-<img src="https://raw.githubusercontent.com/MarcussRico/MarcussRico/output/snake.svg" alt="contribution snake" width="100%" />
-
-</div>
-
----
-
-<div align="center">
-
-# How I Work
-
-### *Solve the boring problem first. The interesting one is usually hiding behind it.*
-
-</div>
+## How I work
 
 <table>
 <tr>
 <td width="50%" valign="top">
 
-**Baselines before optimization**
-Get the dumbest version working end to end before tuning anything. A tuned pipeline built on a broken assumption is worse than a rough one built on a correct one.
+**Baselines before optimisation.** Get the simplest version working end to end before tuning anything.
 
-**One variable at a time**
-If two things changed between two results, the comparison is noise. Ablate, don't bundle.
+**One variable at a time.** If two things changed between two results, the comparison is noise.
 
-**Write down what didn't work**
-The failed run is data. Most of what looks like "trying random things" is actually just not keeping notes.
+**Write down what didn't work.** The failed run is data.
 
 </td>
 <td width="50%" valign="top">
 
-**Honest numbers over impressive numbers**
-I'd rather report a real `0.82` than a suspicious `0.97` I can't explain. If a result looks too good, the first suspect is the eval, not the model.
+**Honest numbers over impressive ones.** If a result looks too good, the first suspect is the eval, not the model.
 
-**Read the paper, then read the code**
-The paper tells you what the method is supposed to do. The code tells you what it actually does. They disagree more often than people admit.
+**Read the paper, then read the code.** They disagree more often than people admit.
 
-**Ship the thing that survives contact with real data**
-Clean benchmarks are a starting point, not the goal. The real test is messy, incomplete, and doesn't look like the training set.
+**Ship what survives real data.** Clean benchmarks are a starting point, not the goal.
 
 </td>
 </tr>
 </table>
 
----
+<details>
+<summary><b>Earlier projects</b></summary>
 
-<div align="center">
+<br>
 
-## Outside the terminal
+| Project | What it does | Stack |
+|---|---|---|
+| **Data Analysis Harness** | An agent harness for exploring unseen datasets: sandboxed execution, long-horizon memory, self-healing tool calls, approval gates | Python, tool calling |
+| **Recipe scraper** | About 1,000,000 recipes collected and structured as a RAG corpus for a food-focused LLM app | Python, BeautifulSoup |
+| **Aide** | A daily assistant: function-calling tools, whiteboard photo to tasks, neural TTS | FastAPI, Groq, SQLite |
+| **Medical RAG chatbot** | Retrieval-augmented QA over medical literature with cited answers | LLaMA 3.3, Groq, Pinecone, LangChain |
+| **Vision** | Gesture-controlled mouse, sign-language CNN, monocular depth with MiDaS | MediaPipe, OpenCV, TensorFlow, PyTorch |
+| **Games** | Unity titles in C#, browser games in JavaScript, 3D assets | Unity, C#, JS, Blender |
 
-<img src="https://img.shields.io/badge/Speedcubing-FF5800?style=for-the-badge&logo=rubikscube&logoColor=white" />
-<img src="https://img.shields.io/badge/Swimming-0077B6?style=for-the-badge" />
-<img src="https://img.shields.io/badge/-Chess-769656?style=flat-square&logo=lichess&logoColor=white" />
+</details>
 
-<br/><br/>
-
-**Open to collaborating on agentic AI, RAG pipelines, and LLM-based systems** — also into applied ML for computer vision and remote sensing.
-
-<a href="mailto:saianandro@gmail.com"><img src="https://img.shields.io/badge/saianandro@gmail.com-D14836?style=for-the-badge&logo=gmail&logoColor=white" /></a>
-
-<img src="https://capsule-render.vercel.app/api?type=waving&color=0:000000,30:0d0d0d,65:1a1a1a,100:000000&height=140&section=footer" width="100%" />
-
-</div>
+<p align="center"><sub>Outside the terminal: speedcubing, swimming, chess.</sub></p>
